@@ -39,7 +39,9 @@ def run():
         """
     )
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
-    st.dataframe(data.head())
-    
+    #st.dataframe(data.head())
+    sample2024 = data[data['Year'] == 2024]
+    educhist = px.histogram(sample2024['PEEDUCA'])
+    st.plotly_chart(educhist)
 if __name__ == "__main__":
     run()
