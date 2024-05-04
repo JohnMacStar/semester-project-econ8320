@@ -14,7 +14,6 @@
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from streamlit.logger import get_logger
 
 
@@ -39,7 +38,7 @@ def run():
         """
     )
     data = pd.read_csv("ECON8320Final.csv")
-    data
+    st.dataframe(data.head())
     
 if __name__ == "__main__":
     run()
