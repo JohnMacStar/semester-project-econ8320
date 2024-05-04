@@ -37,8 +37,8 @@ def run():
         - Income and unemployment are the main ones.
         """
     )
-    data = pd.read_csv("ECON8320Final.csv")
-    st.dataframe(data.head())
+    #data = pd.read_csv("ECON8320Final.csv")
+    #st.dataframe(data.head())
     
 if __name__ == "__main__":
     run()
