@@ -18,7 +18,7 @@ from streamlit.logger import get_logger
 
 LOGGER = get_logger(__name__)
 
-pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
+
 def run():
     st.set_page_config(
         page_title="Introduction",
@@ -35,6 +35,7 @@ def run():
         - I will be covering education and its impacts on a multitude of factors
         - Income and unemployment are the main ones.
     """
+    pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
     )
     
 
