@@ -14,7 +14,9 @@
 
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 from streamlit.logger import get_logger
+
 
 LOGGER = get_logger(__name__)
 
@@ -37,7 +39,7 @@ def run():
         """
     )
     data = pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
-    plot = px.scatter(data["yes"])
+    plot = px.histogram(data["yes"])
     st.plotly_chart(plot)
 if __name__ == "__main__":
     run()
