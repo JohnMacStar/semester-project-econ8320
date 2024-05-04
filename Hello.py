@@ -17,7 +17,7 @@ from streamlit.logger import get_logger
 
 LOGGER = get_logger(__name__)
 
-
+pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
 def run():
     st.set_page_config(
         page_title="Introduction",
@@ -35,6 +35,7 @@ def run():
         - Income and unemployment are the main ones.
     """
     )
+    
 
 
 if __name__ == "__main__":
