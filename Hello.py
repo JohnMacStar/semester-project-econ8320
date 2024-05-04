@@ -37,7 +37,7 @@ def run():
         """
     )
     data = pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
-    plot = px.histogram(data["yes"])
+    plot = px.scatter(data["yes"])
     st.plotly_chart(plot)
 if __name__ == "__main__":
     run()
