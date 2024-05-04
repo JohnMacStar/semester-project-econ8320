@@ -35,9 +35,8 @@ def run():
         - I will be covering education and its impacts on a multitude of factors
         - Income and unemployment are the main ones.
         """
-    pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
     )
-    
+    pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
 
 
 if __name__ == "__main__":
