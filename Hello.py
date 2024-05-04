@@ -31,8 +31,8 @@ def run():
     st.markdown(
         """
         This is an introduction to my streamlit dashboard!
-        -I will be covering education and its impacts on a multitude of factors
-        -Income and unemployment are the main ones.
+        - I will be covering education and its impacts on a multitude of factors
+        - Income and unemployment are the main ones.
     """
     )
 
