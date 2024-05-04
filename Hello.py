@@ -36,8 +36,8 @@ def run():
         - Income and unemployment are the main ones.
         """
     )
-    pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
-
-
+    data = pd.read_csv("https://raw.githubusercontent.com/JohnMacStar/semester-project-econ8320/main/Test.csv")
+    plot = px.histogram(data["yes"])
+    st.plotly_chart(plot)
 if __name__ == "__main__":
     run()
