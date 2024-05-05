@@ -44,19 +44,51 @@ def run():
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
+    
     kiddata = sample2024[['PEEDUCA', 'PRNMCHLD']]
     kiddata = kiddata.groupby(['PEEDUCA']).mean().reset_index()
+
+    incvchld = ulttest[['Income', 'PRNMCHLD']]
+    incvchld = incvchld.groupby(["Income"]).mean().reset_index()
+
+    raceinc = ulttest[['Income', 'PTDTRACE']]
+    raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
+    raceinc = raceinc.sort_values('Income', ascending=False)
+    
     test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     test[0] = test[0].str.replace(',','')
     test[0] = test[0].fillna("0")
     test[0] = test[0].astype(int)
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
+    
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
+    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
+    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
+
+    ##Eventually edit to make this main data
+    fullData =data.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
+    fullData[0] = fullData[0].str.replace(',','')
+    fullData[0] = fullData[0].fillna("0")
+    fullData[0] = fullData[0].astype(int)
+    fullData = pd.concat([fullData,data], axis = 1)
+    fullData = fullData.rename(columns = {0:"Income"})
+    
+    fullSample2024 = fullData[(fullData['Year'] == 2024)]
+    
+    timeInc = fullData[['Income', 'Year']]
+    timeInc = timeInc.groupby(["Year"]).mean().reset_index()
+    
+    timeoInc = px.line(timeInc, x = "Year", y = "Income")
+    #End of comment
+    
     st.plotly_chart(educbox)
     st.plotly_chart(educhist)
     st.plotly_chart(kidbar)
+    st.plotly_chart(childrenvinc)
+    st.plotly_chart(racebar)
+    st.plotly_chart(timeoInc)
 if __name__ == "__main__":
     run()
