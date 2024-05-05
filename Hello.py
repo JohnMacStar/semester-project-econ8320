@@ -41,7 +41,15 @@ def run():
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     #st.dataframe(data.head())
     sample2024 = data[data['Year'] == 2024]
-    educhist = px.histogram(sample2024['PEEDUCA'])
-    st.plotly_chart(educhist)
+    
+    test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
+    test[0] = test[0].str.replace(',','')
+    test[0] = test[0].fillna("0")
+    test[0] = test[0].astype(int)
+    ulttest = pd.concat([test,sample2024], axis = 1)
+    ulttest = ulttest.rename(columns = {0:"Income"})
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
+    
+    st.plotly_chart(educbox)
 if __name__ == "__main__":
     run()
