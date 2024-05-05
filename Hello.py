@@ -52,8 +52,9 @@ def run():
     ulttest = ulttest.rename(columns = {0:"Income"})
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
-    
+    kidbox = px.box(sample2024, x = "PEEDUCA", y = "PRNMCHLD")
     st.plotly_chart(educbox)
     st.plotly_chart(educhist)
+    st.plotly_chart(kidbox)
 if __name__ == "__main__":
     run()
