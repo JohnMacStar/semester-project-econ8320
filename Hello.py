@@ -48,6 +48,9 @@ def run():
     test[0] = test[0].astype(int)
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
+    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace('(ged)','')
+    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
+    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
     
     st.plotly_chart(educbox)
