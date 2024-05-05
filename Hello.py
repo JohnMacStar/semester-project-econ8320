@@ -44,6 +44,8 @@ def run():
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
+    kiddata = sample2024[['PEEDUCA', 'PRNMCHLD']]
+    kiddata = kiddata.groupby(['PEEDUCA']).mean().reset_index()
     test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     test[0] = test[0].str.replace(',','')
     test[0] = test[0].fillna("0")
@@ -52,9 +54,9 @@ def run():
     ulttest = ulttest.rename(columns = {0:"Income"})
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
-    kidbox = px.bar(sample2024, x = "PEEDUCA", y = "PRNMCHLD")
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
     st.plotly_chart(educbox)
     st.plotly_chart(educhist)
-    st.plotly_chart(kidbox)
+    st.plotly_chart(kidbar)
 if __name__ == "__main__":
     run()
