@@ -41,19 +41,15 @@ def run():
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     #st.dataframe(data.head())
     sample2024 = data[data['Year'] == 2024]
-    
+    sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
+    sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
+    sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
     test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     test[0] = test[0].str.replace(',','')
     test[0] = test[0].fillna("0")
     test[0] = test[0].astype(int)
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
-    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace('(ged)','')
-    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
-    ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
-    educhist['PEEDUCA'] = educhist['PEEDUCA'].str.replace('(ged)','')
-    educhist['PEEDUCA'] = educhist['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
-    educhist['PEEDUCA'] = educhist['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
     
