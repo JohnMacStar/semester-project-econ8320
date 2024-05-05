@@ -52,7 +52,7 @@ def run():
     ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
     ulttest['PEEDUCA'] = ulttest['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "probability density")
     
     st.plotly_chart(educbox)
     st.plotly_chart(educhist)
