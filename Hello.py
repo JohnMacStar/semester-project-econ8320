@@ -52,12 +52,6 @@ def run():
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
     
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
-    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
-    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
-
     kiddata = sample2024[['PEEDUCA', 'PRNMCHLD']]
     kiddata = kiddata.groupby(['PEEDUCA']).mean().reset_index()
 
@@ -67,6 +61,13 @@ def run():
     raceinc = ulttest[['Income', 'PTDTRACE']]
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
+
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
+    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
+    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
+
 
     ##Eventually edit to make this main data
     fullData =data.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
