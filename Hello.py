@@ -81,7 +81,7 @@ def run():
     empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
-    emplbar = px.hist(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent")
+    emplbar = px.hist(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", histnorm = "percent")
     
     fullSample2024 = fullData[(fullData['Year'] == 2024)]
     
