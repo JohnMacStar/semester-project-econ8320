@@ -19,7 +19,7 @@ import numpy as np
 import streamlit as st
 from streamlit.hello.utils import show_code
 
-def Page2() -> None:
+def Page2():
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     #st.dataframe(data.head())
     sample2024 = data[data['Year'] == 2024]
