@@ -27,16 +27,8 @@ def run():
         page_icon=":spiral_note_pad:",
     )
 
-    st.write("# Introduction")
+    st.write("# How Important is Education in Relation to Earning a Higher Income")
 
-    #st.sidebar.success("Select a demo above.")
-
-    st.markdown(
-        """
-        This is an introduction to my streamlit dashboard!
-        - I will be covering education and its impacts on a multitude of factors
-        - Income and unemployment are the main ones.
-        """
     )
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     #st.dataframe(data.head())
@@ -89,15 +81,26 @@ def run():
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
     
     timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA")
+
+    hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
+    hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
+    hoursinc = hoursinc.groupby(["PEEDUCA","Income"]).mean().reset_index()
+    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA")
     #End of comment
 
     
     st.plotly_chart(educbox)
-    st.plotly_chart(educhist)
-    st.plotly_chart(kidbar)
-    st.plotly_chart(childrenvinc)
     st.plotly_chart(racebar)
     st.plotly_chart(timeoInc)
-    st.plotly_chart(emplbar)
+    st.plotly_chart(hourvinc)
+    
+    
+    
+    
+    
+    #st.plotly_chart(emplbar)
+    #st.plotly_chart(childrenvinc)
+    #st.plotly_chart(kidbar)
+    #st.plotly_chart(educhist)
 if __name__ == "__main__":
     run()
