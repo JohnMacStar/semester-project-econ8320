@@ -22,8 +22,10 @@ import streamlit as st
 from streamlit.hello.utils import show_code
 
 def Page2():
+
+    st.write("# Population Distribution of Education")
+    
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
-    #st.dataframe(data.head())
     sample2024 = data[data['Year'] == 2024]
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
@@ -67,12 +69,21 @@ def Page2():
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
     emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent")
 
+
+    raceed = ulttest[['PEEDUCA', 'PTDTRACE']]
+    raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
+    raceed = raceed.rename(columns = ({0:"Count"}))
+    raceed = raceed[(raceed.PTDTRACE == "White only") | (raceed.PTDTRACE == "Black only") | (raceed.PTDTRACE == "Asian only")]
+    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent")
     #End of comment
+    
+    st.plotly_chart(educhist)
+    st.plotly_chart(raceved)
     
     st.plotly_chart(emplbar)
     st.plotly_chart(childrenvinc)
     st.plotly_chart(kidbar)
-    st.plotly_chart(educhist)
+    
     st.plotly_chart(racebar)
 
 
