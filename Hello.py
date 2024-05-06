@@ -89,8 +89,21 @@ def run():
 
     
     st.plotly_chart(educbox)
+    st.write("""
+    Obtaining a higher education not only will increase the amount of knowledge someone has but also increases their abilities and skills within that sector. 
+    Academic achievement exemplifies the development and preparedness that one gains from a well rounded education. This is more appealing to compainies and there for
+    will typically be offered higher salaries.
+    """)
     st.plotly_chart(timeoInc)
+    st.write("""
+    Salaries over time do increase to match up with inflation and tend to increase at a fairly steady rate regardless of education. Having a higher education will start
+    with a larger starting salary but the increases will still be on par with most other positions.
+    """)
     st.plotly_chart(hourvinc)
+    st.write("""
+    The number of hours worked will directly affect income level regardless of education level. However, higher education salaries will tend to surpass lower 
+    education salaries even with less working hours per week.
+    """)
     
     
     
