@@ -62,7 +62,7 @@ def run():
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
 
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income")
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
     childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
