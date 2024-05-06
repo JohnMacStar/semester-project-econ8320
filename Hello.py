@@ -79,11 +79,12 @@ def run():
     
     fullSample2024 = fullData[(fullData['Year'] == 2024)]
     
-    timeInc = fullData[['Income', 'Year', 'PEEDUCA']]
-    timeInc = timeInc.groupby([["Year","PEEDUCA"]]).mean().reset_index()
+    timeInc = fullData[['Income', 'Year','PEEDUCA']]
+    timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
     
-    timeoInc = px.line(timeInc, x = "Year", y = "Income")
+    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA")
     #End of comment
+
     
     st.plotly_chart(educbox)
     st.plotly_chart(educhist)
