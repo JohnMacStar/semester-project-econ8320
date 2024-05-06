@@ -74,5 +74,4 @@ def Page2():
     st.plotly_chart(racebar)
 
 
-page2()
-show_code(page2)
+Page2()
