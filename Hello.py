@@ -89,7 +89,6 @@ def run():
 
     
     st.plotly_chart(educbox)
-    st.plotly_chart(racebar)
     st.plotly_chart(timeoInc)
     st.plotly_chart(hourvinc)
     
@@ -101,5 +100,6 @@ def run():
     #st.plotly_chart(childrenvinc)
     #st.plotly_chart(kidbar)
     #st.plotly_chart(educhist)
+    #st.plotly_chart(racebar)
 if __name__ == "__main__":
     run()
