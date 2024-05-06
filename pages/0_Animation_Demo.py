@@ -75,3 +75,4 @@ def Page2():
 
 
 page2()
+show_code(page2)
