@@ -76,6 +76,12 @@ def run():
     fullData[0] = fullData[0].astype(int)
     fullData = pd.concat([fullData,data], axis = 1)
     fullData = fullData.rename(columns = {0:"Income"})
+
+    empl = fullData[['PEEDUCA','PREXPLF']]
+    empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
+    empl = empl.rename(columns = {0:"Count"})
+    empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
+    emplbar = px.bar(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group")
     
     fullSample2024 = fullData[(fullData['Year'] == 2024)]
     
@@ -92,5 +98,6 @@ def run():
     st.plotly_chart(childrenvinc)
     st.plotly_chart(racebar)
     st.plotly_chart(timeoInc)
+    st.plotly_chart(emplbar)
 if __name__ == "__main__":
     run()
