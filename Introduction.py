@@ -26,6 +26,6 @@ def run():
         page_title="Introduction",
         page_icon=":spiral_note_pad:",
     )
-
+    st.write("Introduction")
 if __name__ == "__main__":
     run()
