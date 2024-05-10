@@ -45,6 +45,7 @@ def Page2():
     incvchld = incvchld.groupby(["Income"]).mean().reset_index()
 
     raceinc = ulttest[['Income', 'PTDTRACE']]
+    raceinc = raceinc.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
 
