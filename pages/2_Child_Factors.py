@@ -53,6 +53,5 @@ def page3():
     
     st.plotly_chart(childrenvinc)
     st.plotly_chart(kidbar)
-    st.plotly_chart(racebar)
 
 page3()
