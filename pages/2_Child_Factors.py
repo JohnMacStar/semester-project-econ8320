@@ -21,7 +21,8 @@ import streamlit as st
 from streamlit.hello.utils import show_code
 
 
-def page4():
+def page3():
+    st.write("Income And Education Affect the Number of Children Families Have")
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     sample2024 = data[data['Year'] == 2024]
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
@@ -55,4 +56,4 @@ def page4():
     st.plotly_chart(racebar)
 )
 
-page4()
+page3()
