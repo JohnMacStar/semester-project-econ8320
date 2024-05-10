@@ -16,7 +16,7 @@ from urllib.error import URLError
 
 import pandas as pd
 import pydeck as pdk
-
+import plotly.express as px
 import streamlit as st
 from streamlit.hello.utils import show_code
 
