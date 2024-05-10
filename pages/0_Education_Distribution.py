@@ -51,9 +51,7 @@ def Page2():
 
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
-    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
-    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
+
 
 
     ##Eventually edit to make this main data
@@ -80,12 +78,6 @@ def Page2():
     
     st.plotly_chart(educhist)
     st.plotly_chart(raceved)
-    
     st.plotly_chart(emplbar)
-    st.plotly_chart(childrenvinc)
-    st.plotly_chart(kidbar)
-    
-    st.plotly_chart(racebar)
-
 
 Page2()
