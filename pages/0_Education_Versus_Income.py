@@ -49,14 +49,9 @@ def Page1():
     raceinc = raceinc.sort_values('Income', ascending=False)
     
     
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'color':"Sex"}, labels={
-                     "PEEDUCA": "Education Attained",
-                 })
-    
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'color':"Sex", "PEEDUCA": "Education Attained"})
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"})
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained"}, labels={
-                     "PEERNHRO": "Education Attained",
-                 })
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"})
 
 
     ##Eventually edit to make this main data
