@@ -29,6 +29,15 @@ def run():
     st.write("# Introduction")
 
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
+
+    fullData =data.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
+    fullData[0] = fullData[0].str.replace(',','')
+    fullData[0] = fullData[0].fillna("0")
+    fullData[0] = fullData[0].astype(int)
+    fullData = pd.concat([fullData,data], axis = 1)
+    fullData = fullData.rename(columns = {0:"Income"})
+
+    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa")
     
     data = data[["STATE","PEEDUCA"]]
     data = data.groupby(["STATE","PEEDUCA"]).size().reset_index()
@@ -42,7 +51,10 @@ def run():
     data['total'] = (data['Count_x'] / data['Count_y'])*100
     
     mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23))
+    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa")
+    
     
     st.plotly_chart(mapdata)
+    st.plotly_chart(incmap)
 if __name__ == "__main__":
     run()
