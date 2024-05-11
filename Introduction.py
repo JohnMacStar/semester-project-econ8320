@@ -61,9 +61,9 @@ def run():
     We can also look at other factors that relate to education and income. This analysis will be based only on the census data which represents close to 1% of the population 
     to give a general idea of the bigger picture. Also, salary trending data will be based upon the lower fence of salary in order to remove extreme outliers.
     """)
-    mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23), color_continuous_scale='plasma', labels={'color':"Percent Population <br> with Master's Degree"}, title = "Distribution of Population with a Master's Degree")
+    mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23), color_continuous_scale='plasma', labels={'color':"Percent Population <br> with Master's Degree"}, title = "Distribution of Population with a Master's Degree", title_x=0.5)
     mapdata = mapdata.update_layout(plot_bgcolor = 'rgba(0,0,0,0)')
-    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa",color_continuous_scale='plasma',labels={'color':'Income'}, title = "Average Income by State")
+    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa",color_continuous_scale='plasma',labels={'color':'Income'}, title = "Average Income by State", title_x=0.5)
     incmap = incmap.update_layout(plot_bgcolor = 'rgba(0,0,0,0)')
         
     st.plotly_chart(mapdata)
