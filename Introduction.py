@@ -40,8 +40,6 @@ fullData['Income'] = fullData['Income'].astype(int)
 fullData = fullData[['Income','STATE']]
 fullData = fullData.groupby("STATE").mean().reset_index()
 
-incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa")
-
 data = data[["STATE","PEEDUCA"]]
 data = data.groupby(["STATE","PEEDUCA"]).size().reset_index()
 data = data.rename(columns={0:"Count"})
