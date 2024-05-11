@@ -47,12 +47,16 @@ def Page1():
     raceinc = ulttest[['Income', 'PTDTRACE']]
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
-
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
-    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
-    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
+    
+    
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'color':"Sex"}, labels={
+                     "PEEDUCA": "Education Attained",
+                 })
+    
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"})
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained"}, labels={
+                     "PEERNHRO": "Education Attained",
+                 })
 
 
     ##Eventually edit to make this main data
