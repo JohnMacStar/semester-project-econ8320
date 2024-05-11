@@ -27,5 +27,23 @@ def run():
         page_icon=":spiral_note_pad:",
     )
     st.write("# Introduction")
+
+    data = pd.read_csv("ECON8320Final.csv")
+    
+    data = data[["STATE","PEEDUCA"]]
+    data = data.groupby(["STATE","PEEDUCA"]).size().reset_index()
+    data = data.rename(columns={0:"Count"})
+    
+    
+    data['Count'] = data["Count"].astype(int)
+    data
+    test = data.groupby(['STATE']).Count.sum().reset_index()
+    data = pd.merge(data,test, on="STATE")
+    data = data[data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"]
+    data['total'] = (data['Count_x'] / data['Count_y'])*100
+    data
+    
+    mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23))
+    st.
 if __name__ == "__main__":
     run()
