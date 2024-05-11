@@ -36,12 +36,10 @@ def run():
     
     
     data['Count'] = data["Count"].astype(int)
-    data
     test = data.groupby(['STATE']).Count.sum().reset_index()
     data = pd.merge(data,test, on="STATE")
     data = data[data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"]
     data['total'] = (data['Count_x'] / data['Count_y'])*100
-    data
     
     mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23))
     
