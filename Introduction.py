@@ -50,13 +50,32 @@ def run():
     data = pd.merge(data,test, on="STATE")
     data = data[data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"]
     data['total'] = (data['Count_x'] / data['Count_y'])*100
-    
-    mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23))
-    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa")
+
+    st.write("""
+    Furthering education is a large decision to make in order to take your carreer to the next level. 
+    One of the motivating factors for continuing school is to make a higher salary.
+    However, it is never certain that just because someone has a higher education means that they will recieve a higher salary.
+    """)
+    st.write("""
+    Looking at U.S. census data we can take a look at real situations to discover if higher education is actually associated with a higher salary. 
+    We can also look at other factors that relate to education and income. This analysis will be based only on the census data which represents close to 1% of the population 
+    to give a general idea of the bigger picture. Also, salary trending data will be based upon the lower fence of salary in order to remove extreme outliers.
+    """)
+    mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23), paper_bgcolor='#4E5D6C',
+    plot_bgcolor='#4E5D6C',color_continuous_scale='plasma', labels={'color':'Percent Population with Master's Degree'}, title = "Distribution of Population with a Master's Degree")
+    incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa", paper_bgcolor='#4E5D6C',
+    plot_bgcolor='#4E5D6C',color_continuous_scale='plasma',labels={'color':'Income'}, title = "Average Income by State")
         
         
     st.plotly_chart(mapdata)
+    st.write("""This map shows the percentage of population that has obtained a Master's degree. This gives an idea of the distribution of education accross the U.S. 
+    The north-east tends to have more education as education is more valued due to the historical universities that were sprung up in the north-east such as Harvard University.
+    """)
     st.plotly_chart(incmap)
-    
+    st.write("""Using this income map we can look at the similarities and differences between this one and the previous education map. It is clear that there is a relation 
+    between the amount of higher education and higher salary. Colorado stands out as one of the most educated states and highest salary states. 
+    Colorado does not have a super large college or Master's degree graduation rate but Colorado has had a large number of college and Master's educated residents moving to the state.
+    """)
+
 if __name__ == "__main__":
     run()
