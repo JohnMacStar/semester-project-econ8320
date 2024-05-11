@@ -55,7 +55,7 @@ mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], 
 incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa")
     
     
-    #st.plotly_chart(mapdata)
+    st.plotly_chart(mapdata)
     st.plotly_chart(incmap)
 if __name__ == "__main__":
     run()
