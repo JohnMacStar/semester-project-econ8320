@@ -73,12 +73,12 @@ def Page1():
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
     
-    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = ({"PEEDUCA":"Education Attained"})
+    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"})
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
     hoursinc = hoursinc.groupby(["PEEDUCA","Income"]).mean().reset_index()
-    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = ({"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"})
+    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"})
     #End of comment
 
     
