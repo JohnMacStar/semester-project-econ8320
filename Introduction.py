@@ -62,8 +62,9 @@ def run():
     to give a general idea of the bigger picture. Also, salary trending data will be based upon the lower fence of salary in order to remove extreme outliers.
     """)
     mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23), color_continuous_scale='plasma', labels={'color':"Percent Population with Master's Degree"}, title = "Distribution of Population with a Master's Degree")
+    mapdata = mapdata.update_layout(plot_bgcolor = 'rgba(0,0,0,0)')
     incmap = px.choropleth(locationmode = "USA-states", locations = fullData['STATE'], color = fullData['Income'], scope = "usa",color_continuous_scale='plasma',labels={'color':'Income'}, title = "Average Income by State")
-        
+    incmap = incmap.update_layout(plot_bgcolor = 'rgba(0,0,0,0)')
         
     st.plotly_chart(mapdata)
     st.write("""This map shows the percentage of population that has obtained a Master's degree. This gives an idea of the distribution of education accross the U.S. 
