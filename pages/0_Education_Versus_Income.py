@@ -49,7 +49,7 @@ def Page1():
     raceinc = raceinc.sort_values('Income', ascending=False)
     
     
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'color':"Sex", "PEEDUCA": "Education Attained"})
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"})
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"})
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"})
 
@@ -73,12 +73,12 @@ def Page1():
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
     
-    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA")
+    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = ({"PEEDUCA":"Education Attained"})
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
     hoursinc = hoursinc.groupby(["PEEDUCA","Income"]).mean().reset_index()
-    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA")
+    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = ({"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"})
     #End of comment
 
     
