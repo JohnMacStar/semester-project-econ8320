@@ -44,6 +44,7 @@ def run():
     data
     
     mapdata = px.choropleth(locationmode = "USA-states", locations = data['STATE'], color = data['total'], scope = "usa", range_color=(10,23))
-    st.
+    
+    st.plotly_chart(mapdata)
 if __name__ == "__main__":
     run()
