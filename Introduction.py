@@ -28,7 +28,7 @@ def run():
     )
     st.write("# Introduction")
 
-    data = pd.read_csv("ECON8320Final.csv")
+    data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
     
     data = data[["STATE","PEEDUCA"]]
     data = data.groupby(["STATE","PEEDUCA"]).size().reset_index()
