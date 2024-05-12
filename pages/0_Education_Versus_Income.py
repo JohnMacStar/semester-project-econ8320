@@ -73,9 +73,6 @@ def Page1():
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
 
-    timeInc['PEEDUCA'] = pd.Categorical(timeInc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
-    timeInc.sort_values(['PEEDUCA'], inplace=True)
-    timeInc
     timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"})
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
