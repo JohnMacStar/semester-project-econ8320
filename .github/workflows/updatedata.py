@@ -105,7 +105,7 @@ data = df.replace({"STATE":statedict,"CBSA":citydict, "PEEDUCA":educationdict, "
 
 del data['PRHRUSL']
 data = data[(data['PEEDUCA'] == "Bachelor's Degree(ex:ba,ab,bs)") | (data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)") | (data['PEEDUCA'] =="High School Grad-Diploma Or Equiv (ged)")]
-
+data = data.reset_index(drop=True)
 #data = data.rename(columns = {'Unnamed: 12':"Year"})
 
 data.to_csv("DataUpdate.csv", header = False)
