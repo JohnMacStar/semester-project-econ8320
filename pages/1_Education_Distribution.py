@@ -72,7 +72,8 @@ def page2():
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
     raceed = raceed.rename(columns = ({0:"Count"}))
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
-    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"}, title = "Education Attainment Based on Race")
+    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", title = "Education Attainment Based on Race")
+    raceved = raceved.update_layout(labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"})
     #End of comment
     
     st.plotly_chart(educhist)
