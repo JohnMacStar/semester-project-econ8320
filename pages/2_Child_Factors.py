@@ -46,6 +46,9 @@ def page3():
     raceinc = raceinc.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
+
+    kiddata['PEEDUCA'] = pd.Categorical(kiddata['PEEDUCA'], ["High School Grad-Diploma Or Equiv ", "Bachelor's Degree", "MASTER'S DEGREE"])
+    kiddata.sort_values(['PEEDUCA'], inplace=True)
     
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", title = "How Many Kids Families Have Based on Education Level")
     kidbar = kidbar.update_layout(xaxis_title = "Education Attained", yaxis_title = "Average Number of Children per Family", title_x=0.25)
