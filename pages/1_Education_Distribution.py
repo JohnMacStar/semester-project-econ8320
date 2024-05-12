@@ -49,7 +49,7 @@ def page2():
     raceinc = raceinc.sort_values('Income', ascending=False)
 
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"PEEDUCA":"Education Attained", "percent":"Percent Population"}, title = "Education Attainment Distribution", title_x = 0.25)
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"PEEDUCA":"Education Attained", "percent":"Percent Population"}, title = "Education Attainment Distribution")
 
 
 
@@ -65,14 +65,14 @@ def page2():
     empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
-    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PREXPLF":"Employment Status", "PEEDUCA":"Education Attained"}, title = "Employed versus Unmeployed Based on Education", title_x = 0.25)
-
+    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PREXPLF":"Employment Status", "PEEDUCA":"Education Attained"}, title = "Employed versus Unmeployed Based on Education")
+    emplbar = emplbar.update_layout(title_x = 0.25, labels = {"percent of sum of Count":"Percent Population"})
 
     raceed = ulttest[['PEEDUCA', 'PTDTRACE']]
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
     raceed = raceed.rename(columns = ({0:"Count"}))
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
-    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"}, title = "Education Attainment Based on Race", title_x = 0.25)
+    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"}, title = "Education Attainment Based on Race")
     #End of comment
     
     st.plotly_chart(educhist)
