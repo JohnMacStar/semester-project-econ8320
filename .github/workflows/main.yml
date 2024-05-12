@@ -1,0 +1,25 @@
+name: run main.py
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+        
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: install python packages
+        run: |
+          python -m pip install  --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install requests
+      - name: execute py script
+        run: updateData.py
+          
