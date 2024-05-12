@@ -26,7 +26,6 @@ while item < len(sample):
   sample[item] += [year]
   item += 1
 
-sample.pop(0)
 final = sample
 
 df = pd.DataFrame(final)
@@ -104,9 +103,10 @@ df = df.reset_index(drop=True)
 
 data = df.replace({"STATE":statedict,"CBSA":citydict, "PEEDUCA":educationdict, "HEFAMINC":Incomedict,"PREXPLF":Unemployeddict,"PRHRUSL":Workweekdict,"PESEX":Sexdict,"PTDTRACE":Racedict,"PEMARITL":Martialdict})
 
-#del data['PRHRUSL']
-#data = data[(data['PEEDUCA'] == "Bachelor's Degree(ex:ba,ab,bs)") | (data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)") | (data['PEEDUCA'] =="High School Grad-Diploma Or Equiv (ged)")]
+del data['Unnamed: 0']
+del data['PRHRUSL']
+data = data[(data['PEEDUCA'] == "Bachelor's Degree(ex:ba,ab,bs)") | (data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)") | (data['PEEDUCA'] =="High School Grad-Diploma Or Equiv (ged)")]
 data = data.reset_index(drop = True)
-#data = data.rename(columns = {'Unnamed: 12':"Year"})
+data = data.rename(columns = {'Unnamed: 12':"Year"})
 
 data.to_csv("DataUpdate.csv")
