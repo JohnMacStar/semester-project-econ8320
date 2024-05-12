@@ -72,12 +72,19 @@ def Page1():
     
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
+
+    timeInc['PEEDUCA'] = pd.Categorical(timeInc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
+    timeInc.sort_values(['PEEDUCA'], inplace=True)
     
     timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"})
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
     hoursinc = hoursinc.groupby(["PEEDUCA","Income"]).mean().reset_index()
+
+    hoursinc['PEEDUCA'] = pd.Categorical(hoursinc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
+    hoursinc.sort_values(['PEEDUCA'], inplace=True)
+
     hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"})
     #End of comment
 
