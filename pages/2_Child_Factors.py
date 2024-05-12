@@ -47,8 +47,10 @@ def page3():
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
     
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD")
-    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD")
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", title = "How Many Kids Families Have Based on Education Level")
+    kidbar = kidbar.update_layout(xaxis_title = "Education Attained", yaxis_title = "Average Number of Children per Family", title_x=0.25)
+    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD", title = "Income Level Versus the Average Number of Children in a Household")
+    childrenvinc = childrenvinc.update_layout(yaxis_title = "Average Number of Children per Family", title_x = 0.25)
     racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
     
     st.plotly_chart(childrenvinc)
