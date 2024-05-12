@@ -104,7 +104,6 @@ df = df.reset_index(drop=True)
 
 data = df.replace({"STATE":statedict,"CBSA":citydict, "PEEDUCA":educationdict, "HEFAMINC":Incomedict,"PREXPLF":Unemployeddict,"PRHRUSL":Workweekdict,"PESEX":Sexdict,"PTDTRACE":Racedict,"PEMARITL":Martialdict})
 
-del data['Unnamed: 0']
 del data['PRHRUSL']
 data = data[(data['PEEDUCA'] == "Bachelor's Degree(ex:ba,ab,bs)") | (data['PEEDUCA'] == "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)") | (data['PEEDUCA'] =="High School Grad-Diploma Or Equiv (ged)")]
 data = data.reset_index(drop = True)
