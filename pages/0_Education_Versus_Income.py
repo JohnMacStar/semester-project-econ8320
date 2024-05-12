@@ -84,7 +84,7 @@ def Page1():
     hoursinc['PEEDUCA'] = pd.Categorical(hoursinc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
     hoursinc.sort_values(['PEEDUCA'], inplace=True)
 
-    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level" color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
+    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
     hoursvinc = hoursvinc.update_layout(x_title = 0.25)
     #End of comment
 
