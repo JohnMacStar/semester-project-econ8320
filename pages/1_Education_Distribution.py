@@ -83,7 +83,7 @@ def page2():
     raceed.sort_values(['PEEDUCA'], inplace=True)
     
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
-    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", title = "Education Attainment Based on Race",labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00", "#DAFF00"])
+    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", title = "Education Attainment Based on Race",labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#FFA500", "#DAFF00"])
     raceved = raceved.update_layout(title_x=0.25, yaxis_title="Percent Population")
     #End of comment
     
