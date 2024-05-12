@@ -54,6 +54,10 @@ def page3():
     racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
     
     st.plotly_chart(childrenvinc)
+    st.write("""Here we analyze the number of children families have based on the amount of income they have. 
+    We can see a very obvious trend that as income increases so does the number of children had by a family.
+    """)
     st.plotly_chart(kidbar)
-
+    st.write("""In this chart we find that those with higher education tend to have more children than those with lower education. While the margin is low it is clear that there is a step increase after each education level.
+    """)
 page3()
