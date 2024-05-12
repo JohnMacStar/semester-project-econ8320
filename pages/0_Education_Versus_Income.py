@@ -50,8 +50,8 @@ def Page1():
     
     
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"])
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"})
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"})
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"},  color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
 
 
     ##Eventually edit to make this main data
