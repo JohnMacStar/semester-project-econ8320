@@ -49,7 +49,8 @@ def Page1():
     raceinc = raceinc.sort_values('Income', ascending=False)
     
     
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"])
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"], title = "Average Income Based on Education Attainment")
+    educbox = educbox.update_layout(x_title = 0.25)
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
 
@@ -73,7 +74,8 @@ def Page1():
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
 
-    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"})
+    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"], title = "Income Over Time Based on Education Attainment")
+    timeoInc = timeoInc.update_layout(x_title = 0.25)
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
@@ -82,7 +84,8 @@ def Page1():
     hoursinc['PEEDUCA'] = pd.Categorical(hoursinc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
     hoursinc.sort_values(['PEEDUCA'], inplace=True)
 
-    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"})
+    hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level" color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
+    hoursvinc = hoursvinc.update_layout(x_title = 0.25)
     #End of comment
 
     
