@@ -18,8 +18,8 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: UpdatedData.csv
-        asset_name: UpdatedData.csv
+        file: DataUpdate.csv
+        asset_name: DataUpdate.csv
         tag: ${{ github.ref }}
         overwrite: true
         body: "This is my release text"
