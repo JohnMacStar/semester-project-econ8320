@@ -50,7 +50,7 @@ def Page1():
     
     
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"], title = "Average Income Based on Education Attainment")
-    educbox = educbox.update_layout(x_title = 0.25)
+    educbox = educbox.update_layout(title_x = 0.25)
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
 
@@ -75,7 +75,7 @@ def Page1():
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
 
     timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"], title = "Income Over Time Based on Education Attainment")
-    timeoInc = timeoInc.update_layout(x_title = 0.25)
+    timeoInc = timeoInc.update_layout(title_x = 0.25)
 
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
@@ -85,7 +85,7 @@ def Page1():
     hoursinc.sort_values(['PEEDUCA'], inplace=True)
 
     hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
-    hoursvinc = hoursvinc.update_layout(x_title = 0.25)
+    hoursvinc = hoursvinc.update_layout(title_x = 0.25)
     #End of comment
 
     
