@@ -50,7 +50,7 @@ def page2():
 
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"PEEDUCA":"Education Attained", "percent":"Percent Population"}, title = "Education Attainment Distribution")
-
+    educhist = educhist.update_layout(title_x=0.25)
 
 
     ##Eventually edit to make this main data
@@ -66,7 +66,7 @@ def page2():
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
     emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PREXPLF":"Employment Status", "PEEDUCA":"Education Attained"}, title = "Employed versus Unmeployed Based on Education")
-    #emplbar = emplbar.update_layout(title_x = 0.25, labels = {"percent of sum of Count":"Percent Population"})
+    emplbar = emplbar.update_layout(title_x = 0.25)
 
     raceed = ulttest[['PEEDUCA', 'PTDTRACE']]
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
