@@ -24,9 +24,9 @@ from streamlit.hello.utils import show_code
 def page4():
     st.write("# Conclusion")
     st.write("""After analyzing education attainment and income level we have been able to explore several factors.
-    -First, we have determined that the level of education attained by individuals directly affects the amount of income they will earn on average.
-    -Second, higher education is much more rare than lower levels of education as higher education can be extremely expensive and require a large comitment.
-    -Third, after exploring some other factors we discovered that the amount of income and level of education both have a positive correlation with the number of children had per household.
+    - First, we have determined that the level of education attained by individuals directly affects the amount of income they will earn on average.
+    - Second, higher education is much more rare than lower levels of education as higher education can be extremely expensive and require a large comitment.
+    - Third, after exploring some other factors we discovered that the amount of income and level of education both have a positive correlation with the number of children had per household.
     """)
 page4()
 
