@@ -50,9 +50,9 @@ def page3():
     kiddata['PEEDUCA'] = pd.Categorical(kiddata['PEEDUCA'], ["High School Grad-Diploma Or Equiv ", "Bachelor's Degree", "MASTER'S DEGREE"])
     kiddata.sort_values(['PEEDUCA'], inplace=True)
     
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", title = "How Many Kids Families Have Based on Education Level")
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", title = "How Many Kids Families Have Based on Education Level", color_discrete_sequence=["#00FFFF"])
     kidbar = kidbar.update_layout(xaxis_title = "Education Attained", yaxis_title = "Average Number of Children per Family", title_x=0.25)
-    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD", title = "Income Level Versus the Average Number of Children in a Household")
+    childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD", title = "Income Level Versus the Average Number of Children in a Household", color_discrete_sequence=["#00FFFF"])
     childrenvinc = childrenvinc.update_layout(yaxis_title = "Average Number of Children per Family", title_x = 0.2)
     racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
     
