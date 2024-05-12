@@ -85,7 +85,7 @@ def Page1():
     hoursinc.sort_values(['PEEDUCA'], inplace=True)
 
     hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
-    hoursvinc = hoursvinc.update_layout(title_x = 0.25)
+    hourvinc = hourvinc.update_layout(title_x = 0.25)
     #End of comment
 
     
