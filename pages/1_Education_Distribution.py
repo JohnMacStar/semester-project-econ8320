@@ -72,7 +72,7 @@ def page2():
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
     raceed = raceed.rename(columns = ({0:"Count"}))
     
-    raceed['PEEDUCA'] = pd.Categorical(raceed['PEEDUCA'], ["High School Grad-Diploma Or Equiv", "Bachelor's Degree", "MASTER'S DEGREE"])
+    raceed['PEEDUCA'] = pd.Categorical(raceed['PEEDUCA'], ["High School Grad-Diploma Or Equiv(GED)", "Bachelor's Degree", "MASTER'S DEGREE"])
     raceed.sort_values(['PEEDUCA'], inplace=True)
     
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
