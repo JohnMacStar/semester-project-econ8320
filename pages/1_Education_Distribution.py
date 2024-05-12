@@ -49,7 +49,7 @@ def page2():
     raceinc = raceinc.sort_values('Income', ascending=False)
 
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent")
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"PEEDUCA":"Education Attained", "percent":"Percent Population"})
 
 
 
@@ -65,18 +65,29 @@ def page2():
     empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
-    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent")
+    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PREXPLF":"Employment Status", "PEEDUCA":"Education Attained"})
 
 
     raceed = ulttest[['PEEDUCA', 'PTDTRACE']]
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
     raceed = raceed.rename(columns = ({0:"Count"}))
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
-    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent")
+    raceved = px.histogram(raceed, x = "PEEDUCA", y = "Count", color = "PTDTRACE", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PEEDUCA":"Education Attained", "PTDTRACE":"Race"})
     #End of comment
     
     st.plotly_chart(educhist)
+    st.write("""This shows the distribution of education. 
+    Obtaining a higher education is desireable by some but by others it can seem undesirable and would rather enter the work-force. 
+    Also, Obtaining higher education is very costly and leaves the average graduate with $30,000 in debt after undergrad. 
+    This debt increases as further education is obtained.
+    """)
     st.plotly_chart(raceved)
+    st.write("""This shows a very similar plot to the last except shows the distibution of education among different races.
+    """)
     st.plotly_chart(emplbar)
+    st.write("""This shows the distribution of education among unemployed and employed. 
+    While there is not a vast difference between each category we can see that there are less people unemployed as they have higher education.
+    As we have shown earlier that higher education does in fact lead to higher salary, it also leads to higher employment.
+    """)
 page2()
 
