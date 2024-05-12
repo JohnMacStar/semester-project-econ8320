@@ -72,7 +72,7 @@ def page2():
     raceed = raceed.groupby(["PTDTRACE","PEEDUCA"]).size().reset_index()
     raceed = raceed.rename(columns = ({0:"Count"}))
     
-    raceed['PEEDUCA'] = pd.Categorical(raceed['PEEDUCA'], ["High School Grad-Diploma Or Equiv", "Bachelor's Degree", "MASTER'S DEGREE"])
+    #raceed['PEEDUCA'] = pd.Categorical(raceed['PEEDUCA'], ["High School Grad-Diploma Or Equiv", "Bachelor's Degree", "MASTER'S DEGREE"])
     raceed
     raceed.sort_values(['PEEDUCA'], inplace=True)
     
