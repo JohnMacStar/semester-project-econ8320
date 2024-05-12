@@ -65,6 +65,10 @@ def page2():
     empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
+    
+    empl['PEEDUCA'] = pd.Categorical(empl['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
+    empl.sort_values(['PEEDUCA'], inplace=True)
+    
     emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"percent of sum of Count":"Percent Population", "PREXPLF":"Employment Status", "PEEDUCA":"Education Attained"}, title = "Employed versus Unmeployed Based on Education")
     emplbar = emplbar.update_layout(title_x = 0.25, yaxis_title = "Percent Population")
 
@@ -73,7 +77,6 @@ def page2():
     raceed = raceed.rename(columns = ({0:"Count"}))
     
     raceed['PEEDUCA'] = pd.Categorical(raceed['PEEDUCA'], ["High School Grad-Diploma Or Equiv ", "Bachelor's Degree", "MASTER'S DEGREE"])
-    raceed
     raceed.sort_values(['PEEDUCA'], inplace=True)
     
     raceed = raceed.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
