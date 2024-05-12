@@ -23,5 +23,5 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install requests
       - name: execute py script
-        run: python .github/workflows/updateData.py
+        run: python .github/workflows/updatedata.py
           
