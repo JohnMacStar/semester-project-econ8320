@@ -50,8 +50,8 @@ def page2():
 
     educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX")
 
-    sample2024['PEEDUCA'] = pd.Categorical(sample2024['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
-    sample2024.sort_values(['PEEDUCA'], inplace=True)
+    #sample2024['PEEDUCA'] = pd.Categorical(sample2024['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
+    #sample2024.sort_values(['PEEDUCA'], inplace=True)
     educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels = {"PEEDUCA":"Education Attained", "percent":"Percent Population"}, title = "Education Attainment Distribution")
     educhist = educhist.update_layout(title_x=0.25, yaxis_title = "Percent Population")
 
