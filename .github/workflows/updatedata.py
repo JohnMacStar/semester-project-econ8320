@@ -12,17 +12,10 @@ import json
 import plotly.express as px
 import requests
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
-year = str(datetime.now().year)
-month = (str(datetime.now().strftime("%b"))).lower()
-
-statelink = ("https://api.census.gov/data/2024/cps/basic/jan/variables/STATE.json")
-statereq = requests.get(statelink).text
-statedict = json.loads(statereq)
-statedict = statedict['values']['item']
-
-
-
+year = str((datetime.now() - relativedelta(months=2)).year)
+month = ((datetime.now() - relativedelta(months=2)).strftime("%b")).lower()
 
 link = (f'https://api.census.gov/data/{year}/cps/basic/{month}?get=PEEDUCA,HEFAMINC,PREXPLF,CBSA,PRHRUSL,PESEX,PRNMCHLD,PTDTRACE,PEMARITL,PEERNHRO,STATE&key=79d639ad2cdd37e119e00de062d8835dfa11355f')
 
@@ -118,4 +111,3 @@ data = data.reset_index(drop = True)
 data = data.rename(columns = {'Unnamed: 12':"Year"})
 
 data.to_csv("DataUpdate.csv")
-
