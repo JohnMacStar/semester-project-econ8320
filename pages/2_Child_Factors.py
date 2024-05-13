@@ -23,38 +23,33 @@ from streamlit.hello.utils import show_code
 
 def page3():
     st.write("# Income And Education Affect the Number of Children Families Have")
+
+    #Data pull
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
+    
+    #Reshaping data to fit into graphic requirements
     sample2024 = data[data['Year'] == 2024]
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
-    
     test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     test[0] = test[0].str.replace(',','')
     test[0] = test[0].fillna("0")
     test[0] = test[0].astype(int)
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
-    
     kiddata = sample2024[['PEEDUCA', 'PRNMCHLD']]
     kiddata = kiddata.groupby(['PEEDUCA']).mean().reset_index()
-
     incvchld = ulttest[['Income', 'PRNMCHLD']]
     incvchld = incvchld.groupby(["Income"]).mean().reset_index()
-
-    raceinc = ulttest[['Income', 'PTDTRACE']]
-    raceinc = raceinc.replace({"AI-Asian":"Other","AI-HP":"Other","American Indian, Alaskan Native Only":"Other","Asian-HP":"Other","Black-AI":"Other","Black-Asian":"Other", "Hawaiian/Pacific Islander Only":"Other", "Other 3 Race Combinations":"Other","Other 4 and 5 Race Combinations":"Other", "W-A-HP":"Other", "W-AI-A":"Other", "W-AI-HP":"Other", "W-B-A":"Other", "W-B-AI-A":"Other", "W-B-AI":"Other", "W-B-HP":"Other", "White-AI":"Other", "White-Asian":"Other", "White-Black":"Other","White-HP":"Other"})
-    raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
-    raceinc = raceinc.sort_values('Income', ascending=False)
-
     kiddata['PEEDUCA'] = pd.Categorical(kiddata['PEEDUCA'], ["High School Grad-Diploma Or Equiv ", "Bachelor's Degree", "MASTER'S DEGREE"])
     kiddata.sort_values(['PEEDUCA'], inplace=True)
-    
+
+    #plots
     kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", title = "How Many Kids Families Have Based on Education Level", color_discrete_sequence=["#00FFFF"])
     kidbar = kidbar.update_layout(xaxis_title = "Education Attained", yaxis_title = "Average Number of Children per Family", title_x=0.25)
     childrenvinc = px.scatter(incvchld, x = "Income", y = "PRNMCHLD", title = "Income Level Versus the Average Number of Children in a Household", color_discrete_sequence=["#00FFFF"])
     childrenvinc = childrenvinc.update_layout(yaxis_title = "Average Number of Children per Family", title_x = 0.2)
-    racebar = px.bar(raceinc, x = "PTDTRACE", y = "Income")
     
     st.plotly_chart(childrenvinc)
     st.write("""Here we analyze the number of children families have based on the amount of income they have. 
