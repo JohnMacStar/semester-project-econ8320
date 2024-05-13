@@ -27,9 +27,10 @@ def run():
         page_icon=":spiral_note_pad:",
     )
     st.write("# Introduction")
-
+    #reading in the data
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
-    
+
+    #making more adjustments to the data to have income as a value
     fullData =data.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     fullData[0] = fullData[0].str.replace(',','')
     fullData[0] = fullData[0].fillna("0")
@@ -39,12 +40,11 @@ def run():
     fullData['Income'] = fullData['Income'].astype(int)
     fullData = fullData[['Income','STATE']]
     fullData = fullData.groupby("STATE").mean().reset_index()
-    
+
+    #Working to get a count of those with a Master's degree in order to plot this
     data = data[["STATE","PEEDUCA"]]
     data = data.groupby(["STATE","PEEDUCA"]).size().reset_index()
     data = data.rename(columns={0:"Count"})
-    
-    
     data['Count'] = data["Count"].astype(int)
     test = data.groupby(['STATE']).Count.sum().reset_index()
     data = pd.merge(data,test, on="STATE")
