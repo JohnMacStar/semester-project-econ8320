@@ -23,39 +23,37 @@ from streamlit.hello.utils import show_code
 
 def Page1():
     st.write("# How Important is Education in Relation to Earning a Higher Income")
-
+    #Pulling the data
     data = pd.read_csv("https://github.com/JohnMacStar/semester-project-econ8320/releases/download/Data/ECON8320Final.csv")
-    #st.dataframe(data.head())
+
+    #Filtering only to 2024 data
     sample2024 = data[data['Year'] == 2024]
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ged)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace('(ex:ba,ab,bs)','')
     sample2024['PEEDUCA'] = sample2024['PEEDUCA'].str.replace("(EX:MA,MS,MEng,MEd,MSW)",'')
-    
+
+    #using regex in order to have income as a numeric value
     test = sample2024.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     test[0] = test[0].str.replace(',','')
     test[0] = test[0].fillna("0")
     test[0] = test[0].astype(int)
     ulttest = pd.concat([test,sample2024], axis = 1)
     ulttest = ulttest.rename(columns = {0:"Income"})
-    
+
+    #gathering only data needed and finding the mean of children per education level
     kiddata = sample2024[['PEEDUCA', 'PRNMCHLD']]
     kiddata = kiddata.groupby(['PEEDUCA']).mean().reset_index()
 
+    #gathering only data needed and finding the mean of children per income
     incvchld = ulttest[['Income', 'PRNMCHLD']]
     incvchld = incvchld.groupby(["Income"]).mean().reset_index()
 
+    #gathering only data needed and finding the mean if income based on race
     raceinc = ulttest[['Income', 'PTDTRACE']]
     raceinc = raceinc.groupby(["PTDTRACE"]).mean().reset_index()
     raceinc = raceinc.sort_values('Income', ascending=False)
     
-    
-    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"], title = "Average Income Based on Education Attainment")
-    educbox = educbox.update_layout(title_x = 0.25)
-    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
-    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
-
-
-    ##Eventually edit to make this main data
+    #Using regex again to find income level
     fullData =data.HEFAMINC.str.extract(r'(\d+,?\d+)?([^0-9]*)?(\d+?,\d+)?')
     fullData[0] = fullData[0].str.replace(',','')
     fullData[0] = fullData[0].fillna("0")
@@ -63,30 +61,31 @@ def Page1():
     fullData = pd.concat([fullData,data], axis = 1)
     fullData = fullData.rename(columns = {0:"Income"})
 
+    #Working with data to make various plots
     empl = fullData[['PEEDUCA','PREXPLF']]
     empl = empl.groupby(['PREXPLF','PEEDUCA']).size().reset_index()
     empl = empl.rename(columns = {0:"Count"})
     empl = empl[empl["PREXPLF"] != "In Universe, Met No Conditions To Assign"]
-    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent")
-    
     fullSample2024 = fullData[(fullData['Year'] == 2024)]
-    
     timeInc = fullData[['Income', 'Year','PEEDUCA']]
     timeInc = timeInc.groupby(["Year","PEEDUCA"]).mean().reset_index()
-
-    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"], title = "Income Over Time Based on Education Attainment")
-    timeoInc = timeoInc.update_layout(title_x = 0.25)
-
     hoursinc = fullData[["PEERNHRO", "PEEDUCA","Income"]]
     hoursinc = hoursinc[hoursinc["PEERNHRO"] != -1]
     hoursinc = hoursinc.groupby(["PEEDUCA","Income"]).mean().reset_index()
-
     hoursinc['PEEDUCA'] = pd.Categorical(hoursinc['PEEDUCA'], ["High School Grad-Diploma Or Equiv (ged)", "Bachelor's Degree(ex:ba,ab,bs)", "MASTER'S DEGREE(EX:MA,MS,MEng,MEd,MSW)"])
     hoursinc.sort_values(['PEEDUCA'], inplace=True)
 
+    #creaiting plot variables
+    educbox = px.box(ulttest, x = "PEEDUCA", y = "Income", color = "PESEX", labels={'PESEX':"Sex", "PEEDUCA": "Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7"], title = "Average Income Based on Education Attainment")
+    educbox = educbox.update_layout(title_x = 0.25)
+    educhist = px.histogram(sample2024, x = "PEEDUCA", barmode = "group", histnorm = "percent", labels={'color':"Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
+    kidbar = px.bar(kiddata, x = "PEEDUCA", y = "PRNMCHLD", labels={'color':"Education Attained","PEERNHRO": "Education Attained"}, color = "PEEDUCA", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
     hourvinc = px.scatter(hoursinc, x = "PEERNHRO", y = "Income", color = "PEEDUCA", labels = {"PEERNHRO":"Average Hours Worked Per Week","PEEDUCA":"Education Attained"},title = "Income is Dependent on Hours Worked and Education Level", color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"])
     hourvinc = hourvinc.update_layout(title_x = 0.25)
-    #End of comment
+    emplbar = px.histogram(empl, x = "PREXPLF", y = "Count", color = "PEEDUCA", barmode = "group", histnorm = "percent")
+    timeoInc = px.line(timeInc, x = "Year", y = "Income", color = "PEEDUCA", labels = {"PEEDUCA":"Education Attained"}, color_discrete_sequence=["#00FFFF","#FF6EC7","#DAFF00"], title = "Income Over Time Based on Education Attainment")
+    timeoInc = timeoInc.update_layout(title_x = 0.25)
+
 
     
     st.plotly_chart(educbox)
